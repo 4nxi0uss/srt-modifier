@@ -15,7 +15,7 @@ def transcription ():
     for file in file_names:
 
         input_file = open(file, "r", encoding="utf-8")
-        output_file = open(file_location.split("*")[0] + "po\\" + file.removeprefix(file_location.split("*")[0]).removesuffix(".srt") + "_second part of the output name.srt", "w", encoding="utf-8")
+        output_file = open(file_location.split("*")[0] + "output directory\\" + file.removeprefix(file_location.split("*")[0]).removesuffix(".srt") + "_second part of the output name.srt", "w", encoding="utf-8")
 
         input_file_lines = input_file.readlines()
 
