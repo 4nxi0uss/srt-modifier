@@ -1,10 +1,16 @@
 import glob
 import os
 import msvcrt
+import datetime
 
-file_location = os.path.join('C:\\','path','to','input','directory','*.srt')
+output_file_name = str(input("Name output directory:"))
 
-file_names = glob.glob(file_location)
+file_location = os.path.join('*.srt')
+
+if os.path.exists(os.getcwd()+"\\"+output_file_name):
+    os.mkdir(os.getcwd()+"\\"+output_file_name+ "_"+str(datetime.datetime.now().strftime("%f")) )
+else:
+    os.mkdir(os.getcwd() + "\\" + output_file_name)
 
 def pause():
   print("\nPress any key to continue . . . ")
@@ -12,10 +18,10 @@ def pause():
 
 def transcription ():
     file_progres = 0
-    for file in file_names:
+    for file in glob.glob(file_location):
 
         input_file = open(file, "r", encoding="utf-8")
-        output_file = open(file_location.split("*")[0] + "output directory\\" + file.removeprefix(file_location.split("*")[0]).removesuffix(".srt") + "_second part of the output name.srt", "w", encoding="utf-8")
+        output_file = open(output_file_name+"\\" + file.removeprefix(file_location.split("*")[0]).removesuffix(".srt") + "_second part of the output name.srt", "w", encoding="utf-8")
 
         input_file_lines = input_file.readlines()
 
@@ -41,14 +47,15 @@ def transcription ():
                     line_buffor = line_number
                     output_file.write("[text in first line of text in every block of text]: " + i)
                 
-            except:
-                print("error")
+            except EOFError:
+                print(EOFError)
 
         output_file.close()
 
         file_progres = file_progres + 1
-        print("Progres: ", round((file_progres/len(file_names))*100, 2),"%")
+        print("Progres: ", round((file_progres/len(glob.glob(file_location)))*100, 2),"%")
     print("Program has finished with success!")
     pause()
 
 transcription()
+
