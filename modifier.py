@@ -6,11 +6,14 @@ import datetime
 output_file_name = str(input("Name output directory:"))
 
 file_location = os.path.join('*.srt')
+path_to_file= ""
 
 if os.path.exists(os.getcwd()+"\\"+output_file_name):
     os.mkdir(os.getcwd()+"\\"+output_file_name+ "_"+str(datetime.datetime.now().strftime("%f")) )
+    path_to_file = (os.getcwd()+"\\"+output_file_name+ "_"+str(datetime.datetime.now().strftime("%f")))
 else:
     os.mkdir(os.getcwd() + "\\" + output_file_name)
+    path_to_file = (os.getcwd() + "\\" + output_file_name)
 
 def pause():
   print("\nPress any key to continue . . . ")
@@ -21,7 +24,7 @@ def transcription ():
     for file in glob.glob(file_location):
 
         input_file = open(file, "r", encoding="utf-8")
-        output_file = open(output_file_name+"\\" + file.removeprefix(file_location.split("*")[0]).removesuffix(".srt") + "_second part of the output name.srt", "w", encoding="utf-8")
+        output_file = open(path_to_file+"\\" + file.removeprefix(file_location.split("*")[0]).removesuffix(".srt") + "_second part of the output name.srt", "w", encoding="utf-8")
 
         input_file_lines = input_file.readlines()
 
